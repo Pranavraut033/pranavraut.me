@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.section-header {
+  &>h1 {
+    @apply text-lg;
+
+    span {
+      @apply border-b-2 border-primary-base font-bold text-gray-900;
+    }
+  }
+
+  p {
+    @apply uppercase font-semibold text-gray-500 tracking-wider text-xl
+  }
+}
+
+@screen md {
+  .section-header {
+    p {
+      @apply text-3xl;
+    }
+  }
+}

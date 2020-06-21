@@ -1,0 +1,197 @@
+.navbar {
+  @apply h-screen;
+  @apply p-5;
+  @apply overflow-y-auto;
+  z-index: 7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: 280px;
+  transition: transform 350ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+  .list {
+    @apply flex;
+    @apply flex-col;
+    @apply justify-center;
+    @apply items-start;
+    height: 100%;
+
+    &-item {
+      width: auto;
+      display: inline-block;
+      transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      @apply px-3;
+
+      &-link {
+        @apply rounded-full;
+        @apply bg-gray-400;
+        @apply px-4;
+        @apply my-1;
+        @apply flex;
+        @apply items-center;
+        @apply justify-center;
+        @apply bg-primary-l9;
+
+        width: auto;
+        min-height: 58px;
+        min-width: 58px;
+        transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform: scale(1);
+
+        .list-item-action {
+          @apply text-primary-base;
+        }
+
+        .list-item-title {
+          @apply text-lg;
+          @apply text-white;
+          max-width: 0 !important;
+          overflow: hidden;
+          text-align: center;
+          transition: all 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        &--expanded {
+          .list-item-title {
+            @apply mx-3;
+            max-width: 80px !important;
+          }
+        }
+
+        &--active {
+          @apply bg-primary-base;
+
+          .list-item-title {
+            @apply text-white #{!important};
+          }
+
+          .list-item-action {
+            @apply text-white #{!important};
+          }
+        }
+
+        &:hover {
+          @extend .list-item-link--expanded;
+          @extend .list-item-link--active;
+          @apply shadow-lg;
+          transform: scale(1.05);
+        }
+
+        &.router-link-exact-active {
+          @extend .list-item-link--active;
+        }
+      }
+    }
+  }
+}
+
+.navigation-button {
+  display: none;
+}
+
+@media (max-width: 882px) {
+  .navbar {
+    @apply shadow-lg;
+    @apply bg-white;
+    z-index: 7 !important;
+    width: 320px;
+
+    .list {
+      @apply items-center;
+
+      &-item {
+        width: 218px;
+        transform: translateX(0px);
+        transition: transform 550ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+        &-link {
+          width: 100% !important;
+          @apply justify-start;
+
+          .list-item-title {
+            @apply mx-5 #{!important};
+            max-width: 80px !important;
+            @apply text-primary-d4;
+          }
+        }
+      }
+    }
+
+    &--closed {
+      transform: translateX(-280px) !important;
+
+      .list-item {
+        transform: translateX(-280px) !important;
+      }
+    }
+  }
+
+  .overlay {
+    @apply h-screen;
+    @apply w-screen;
+    position: fixed;
+    z-index: 4 !important;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background: rgba($color: #000000, $alpha: 0.12);
+    backdrop-filter: blur(3px) brightness(67%);
+    transition: opacity visibility 350ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+    &--active {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .navigation-button {
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+    @apply rounded-lg;
+    @apply rounded-r-none;
+    @apply appearance-none;
+
+    border-right: 2px solid theme("colors.primary.base") !important;
+    position: fixed;
+    top: 1rem;
+    right: 0;
+    width: 56px;
+    height: 56px;
+
+    box-shadow: -1px 3px 12px rgba($color: #000000, $alpha: 0.2),
+      -1px -1px 6px rgba($color: #000000, $alpha: 0.08);
+    transition: all 350ms cubic-bezier(0.175, 1.885, 0.32, 1.875);
+
+    &:active {
+      box-shadow: -1px 3px 24px rgba($color: #000000, $alpha: 0.2),
+        -1px -1px 3px rgba($color: #000000, $alpha: 0.08);
+      outline: none !important;
+      transform: scale(1.1) translateX(-2px);
+    }
+
+    &:focus,
+    &:hover {
+      transform: scale(1.05) translateX(-1px);
+    }
+  }
+}
+
+.slide-from-left_margin {
+  opacity: 0;
+  animation: slide-from-left_margin 550ms cubic-bezier(0.785, 0.135, 0.15, 0.86)
+    forwards;
+}
+
+@keyframes slide-from-left_margin {
+  0% {
+    margin-left: -50px;
+    opacity: 0;
+  }
+
+  100% {
+    margin-left: 0px;
+    opacity: 1;
+  }
+}
